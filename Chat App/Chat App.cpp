@@ -25,12 +25,26 @@ void broadcastMessage(const std::string& message, SOCKET sender) {
     }
 }
 
+//function to handle communication with each client
 void handleClient(SOCKET client_socket) {
-    
+    char buffer[1024];
+    while (true) {
+        memset(buffer, 0, sizeof(buffer));
+        int bytes_received = recv(client_socket, buffer, sizeof(buffer), 0);
+        if (bytes_received <= 0) {
+            //client disconnected or an error occurred
+            std::lock_guard<std::mutex> lock(clients_mutex); //lock clients vector
+            clients.erase(std::remove(clients.begin(), clients.end(), client_socket), clients.end()); //remove client
+            closesocket(client_socket);
+            break;
+        }
+        std::string message(buffer); //convert buffer to string
+        broadcastMessage(message, client_socket); // broadcast the received message to other clients
+    }
 }
 
-int main()
-{
+int main() {
+
 }
 
 
