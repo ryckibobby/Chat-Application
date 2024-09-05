@@ -1,4 +1,4 @@
-// Chat App.cpp 
+// Chat App Server.cpp 
 #include <iostream>
 #include <thread>
 #include <vector>
