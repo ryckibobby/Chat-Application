@@ -6,6 +6,7 @@
 #include <mutex>
 #include <algorithm>
 #include <cstring>
+#include <map>
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 
@@ -14,6 +15,42 @@
 //global variables to store connected clients and mutex for thread-safe access
 std::vector<SOCKET> clients;
 std::mutex clients_mutex;
+
+std::map<std::string, std::string> userCredientials = {
+    {"user1","password1"};
+    {"user2", "password2"};
+}
+
+bool authenticateUser(SOCKET client_socket) {
+    char buffer[1024];
+    std::string username, password;
+
+    //ask for username
+    send(client_socket, "Enter username: ", 16, 0);
+    recv(client_socket, buffer, sizeof(buffer), 0);
+    username = buffer;
+
+    //ask for password
+    send(client_socket, "Enter password: ", 16, 0);
+    recv(client_socket, buffer, sizeof(buffer), 0);
+    password = buffer;
+
+    //check credentials
+    if (userCredentials.find(username) != userCredentials.end() && userCredentials[username] == password) {
+        send(client_socket, "Login successful!\n", 18, 0);
+        return true;
+    }
+    else {
+        send(client_socket, "Login failed!\n", 13, 0);
+        closesocket(client_socket);
+        return false;
+    }
+}
+
+//before adding the client to the list in the main function
+if (authenticateUser(client_socket)) {
+    //add to clients vector and start handling messages
+}
 
 //broadcast messages to all clients
 void broadcastMessage(const std::string& message, SOCKET sender) {
