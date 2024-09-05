@@ -7,6 +7,20 @@
 
 #pragma comment (lib, "Ws2_32.lib") // links winsock library
 
+std::string username, password;
+std::cout << "Enter username: ";
+std::getline(std::cin, username);
+send(client_socket, username.c_str(), username.size(), 0);
+
+std::cout << "Enter password: ";
+std::getline(std::cin, password);
+send(client_socket, password.c_str(), password.size(), 0);
+
+std::string roomName;
+std::cout << "Enter chat room: ";
+std::getline(std::cin, roomName);
+send(client_socket, roomName.c_str(), roomName.size(), 0);
+
 //function to receive and print messages from the server
 void receiveMessages() {
 	char buffer[1024];

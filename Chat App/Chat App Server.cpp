@@ -16,6 +16,8 @@
 std::vector<SOCKET> clients;
 std::mutex clients_mutex;
 
+std::map<std::string, std::vector<SOCKET>> chatRooms;
+
 std::map<std::string, std::string> userCredientials = {
     {"user1","password1"};
     {"user2", "password2"};
@@ -52,10 +54,14 @@ if (authenticateUser(client_socket)) {
     //add to clients vector and start handling messages
 }
 
+void joinRoom(const std::string& roomName, SOCKET client_socket) {
+    chatRooms[roomName].push_back(client_socket);
+}
+
 //broadcast messages to all clients
 void broadcastMessage(const std::string& message, SOCKET sender) {
     std::lock_guard<std::mutex> lock(clients_mutex);  
-    for (SOCKET client : clients) {
+    for (SOCKET client : chatRooms[clients_mutex]) { //room specific broadcast
         if (client != sender) {
             send(client, message.c_str(), message.size(), 0);  // send message to the client
         }
