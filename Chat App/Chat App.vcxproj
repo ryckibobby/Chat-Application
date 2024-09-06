@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Chat App.cpp" />
+    <ClCompile Include="Chat App Client.cpp" />
+    <ClCompile Include="Chat App Server.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ChatAppUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
