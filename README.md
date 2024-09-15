@@ -17,16 +17,16 @@ To compile and run this project, you need:
 - Windows operating system (for Winsock2 support).
 - Basic knowledge of socket programming.
 
-## Installation and Setup
+# Installation and Setup
 
-# 1. Open in Visual Studio
+## 1. Open in Visual Studio
   1. Launch in Visual Studio
   2. Add the following files
      - ChatAppServer.cpp
      - ChatAppClient.cpp
      - ChatAppUtils.h
        
-# 2. Build and Configure Project
+## 2. Build and Configure Project
   1. Add Winsock2 library
      - Right-click on the project in the Solution Explorer and select Properties
      - Under Configuration Properties → Linker → Input, add Ws2_32.lib to the Additional Dependencies field.
@@ -34,29 +34,29 @@ To compile and run this project, you need:
      - If you're running the server, right-click ChatAppServer.cpp and select Set as Startup Project.
      - If you're running the client, right-click ChatAppClient.cpp and select Set as Startup Project.
 
-# 3. Build the Project
+## 3. Build the Project
   1. Go to the Build menu and click Build Solution or press Ctrl+Shift+B.
   2. Check for any errors or warnings in the Output or Error List.
 
-## Running the Application
+# Running the Application
 
-# Running the Server
+## Running the Server
   1 .Set the ChatAppServer.cpp as the startup project.
   2. Press F5 to run the server. The server will start listening for connections on 127.0.0.1:8080.
 
-# Running the Client
+## Running the Client
   1. Set the ChatAppClient.cpp as the startup project.
   2.Press F5 to run the client. The client will connect to the server at 127.0.0.1:8080.
   3. You can open multiple client instances to simulate multiple users.
      
-# Sending Messages
+## Sending Messages
   1. Once connected, you can send a message by typing into the console and pressing Enter.
   2. Messages will be broadcast to all connected clients, and each client will see messages from other clients.
      
-# Closing the Application
+## Closing the Application
   !. To stop the server or client, press Ctrl+C or close the console window.
 
-## Future Improvements
+# Future Improvements
  - Add user authentication.
  - Encrypt messages using SSL/TLS.
  - Improve error handling and stability.
